@@ -87,7 +87,7 @@ class FormMain(QMainWindow, Ui_Form_main):
                 elif type(config[item]) == type(True):
                     exec(f"self.{item}.setChecked({config[item]})")
                 elif type(config[item]) == type(""):
-                    exec(f"self.{item}.setText(\"{config[item]}\")")
+                    exec(f"self.{item}.setText(r\"{config[item]}\")")
         super(FormMain, self).__init__()
         self.setupUi(self)
         self.pushButton_login.clicked.connect(self.login)
