@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import json
+import subprocess
 
 from UI.main import Ui_Form_main
 from UI.qrcode import Ui_Form_QRcode
@@ -19,7 +20,8 @@ class RunBBDown(QThread):
         super(RunBBDown, self).__init__()
         self.command = command
     def run(self):
-        os.system(f"{bbdowndir} {self.command}")
+        p = subprocess.Popen(f"\"{bbdowndir}\" {self.command}", shell=True)
+        p.wait()
 
 class FormLogin(QMainWindow, Ui_Form_QRcode):
     def __init__(self, arg):
@@ -170,9 +172,9 @@ class FormMain(QMainWindow, Ui_Form_main):
         elif self.radioButton_8.isChecked():
             arg += " -av1"
         if self.checkBox_ffmpeg.isChecked():
-            arg += f" --ffmpeg-path {self.lineEdit_ffmpeg.text()}"
+            arg += f" --ffmpeg-path \"{self.lineEdit_ffmpeg.text()}\""
         if self.checkBox_aria2c.isChecked():
-            arg += f" --use-aria2c --aria2c-path {self.lineEdit_aria2c.text()}"
+            arg += f" --use-aria2c --aria2c-path \"{self.lineEdit_aria2c.text()}\""
         if self.checkBox_25.isChecked():
             arg += " -p ALL"
         if self.advanced:
@@ -221,13 +223,14 @@ class FormMain(QMainWindow, Ui_Form_main):
             if self.checkBox_22.isChecked():
                 arg += f" -token {self.lineEdit_5.text()}"
             if self.checkBox_23.isChecked():
-                arg += f" --mp4box-path {self.lineEdit_6.text()}"
+                arg += f" --mp4box-path \"{self.lineEdit_6.text()}\""
             if self.checkBox_24.isChecked():
                 arg += f" --delay-per-page {self.lineEdit_7.text()}"
-        arg += f" --work-dir {self.lineEdit_dir.text()}"
+        arg += f" --work-dir \"{self.lineEdit_dir.text()}\""
         arg += f" {self.lineEdit_url.text()}"
         self.job1 = RunBBDown(arg)
         self.job1.start()
+
     def advanced(self):
         if not self.advanced:
             self.pushButton_advanced.setText("简易选项<")
@@ -246,3 +249,4 @@ if __name__ == '__main__':
     win_main = FormMain()
     win_main.show()
     sys.exit(app.exec_())
+
