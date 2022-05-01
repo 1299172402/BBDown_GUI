@@ -43,3 +43,9 @@ python BBDown_GUI.py
  - [GUI开坑](https://github.com/1299172402/BBDown_GUI/blob/main/gui_start.md)
 
 -->
+
+## 相关Repositories
+
+ - [BBDown_hk]https://github.com/1299172402/BBDown_hk
+   (个人站点解析，替换UPOS加速下载，只有从网页端下载有效)
+
