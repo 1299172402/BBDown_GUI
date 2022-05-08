@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\Desktop\BBDown\UI\qrcode.ui'
+# Form implementation generated from reading ui file 'D:\Desktop\BBDown_GUI\UI\qrcode.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -18,7 +18,7 @@ class Ui_Form_QRcode(object):
         Form_QRcode.setMinimumSize(QtCore.QSize(455, 421))
         Form_QRcode.setMaximumSize(QtCore.QSize(455, 421))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("D:\\Desktop\\BBDown\\UI\\favicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("D:\\Desktop\\BBDown_GUI\\UI\\favicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form_QRcode.setWindowIcon(icon)
         self.label_QR = QtWidgets.QLabel(Form_QRcode)
         self.label_QR.setGeometry(QtCore.QRect(80, 40, 300, 300))

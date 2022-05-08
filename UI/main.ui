@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
-    <height>400</height>
+    <width>1560</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1220</width>
+    <width>1560</width>
     <height>500</height>
    </size>
   </property>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>160</y>
+     <y>180</y>
      <width>571</width>
      <height>31</height>
     </rect>
@@ -41,6 +41,9 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QCheckBox" name="checkBox_ffmpeg">
+      <property name="whatsThis">
+       <string/>
+      </property>
       <property name="text">
        <string>ffmpeg</string>
       </property>
@@ -71,50 +74,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>200</y>
-     <width>571</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QCheckBox" name="checkBox_aria2c">
-      <property name="text">
-       <string>aria2c</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit_aria2c">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_aria2c">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>浏览</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>240</y>
+     <y>220</y>
      <width>571</width>
      <height>31</height>
     </rect>
@@ -149,116 +113,87 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>440</x>
      <y>20</y>
-     <width>191</width>
-     <height>131</height>
+     <width>161</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="title">
     <string>下载源</string>
    </property>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QComboBox" name="comboBox_source">
     <property name="geometry">
      <rect>
-      <x>19</x>
-      <y>20</y>
-      <width>151</width>
-      <height>101</height>
+      <x>10</x>
+      <y>30</y>
+      <width>141</width>
+      <height>22</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QRadioButton" name="radioButton_1">
-       <property name="text">
-        <string>网页端（无参数）</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_2">
-       <property name="text">
-        <string>TV端（-tv）</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_3">
-       <property name="text">
-        <string>APP端（-app）</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_4">
-       <property name="text">
-        <string>国际端（-intl）</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <item>
+     <property name="text">
+      <string>网页端</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>TV端</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>APP端</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>国际端</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>20</y>
-     <width>241</width>
-     <height>131</height>
+     <x>440</x>
+     <y>110</y>
+     <width>161</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="title">
-    <string>下载视频格式</string>
+    <string>下载视频编码格式</string>
    </property>
-   <widget class="QWidget" name="verticalLayoutWidget_2">
+   <widget class="QComboBox" name="comboBox_encoding">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>224</width>
-      <height>101</height>
+      <width>141</width>
+      <height>22</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QRadioButton" name="radioButton_5">
-       <property name="text">
-        <string>优先下载可用编码（无参数）</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_6">
-       <property name="text">
-        <string>只下载hevc编码（-hevc)</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_7">
-       <property name="text">
-        <string>只下载avc编码(-avc)</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_8">
-       <property name="text">
-        <string>只下载av1编码(-av1)</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <item>
+     <property name="text">
+      <string>优先可用编码</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AVC</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AV1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>HEVC</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_3">
@@ -267,7 +202,7 @@
      <x>20</x>
      <y>20</y>
      <width>131</width>
-     <height>131</height>
+     <height>141</height>
     </rect>
    </property>
    <property name="title">
@@ -279,7 +214,7 @@
       <x>10</x>
       <y>20</y>
       <width>111</width>
-      <height>100</height>
+      <height>111</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -304,14 +239,14 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>300</y>
+     <y>280</y>
      <width>571</width>
      <height>41</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_url">
       <property name="text">
        <string>视频地址</string>
       </property>
@@ -330,16 +265,6 @@
       </property>
       <property name="whatsThis">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="checkBox_25">
-      <property name="text">
-       <string>下载全部分p</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -390,14 +315,14 @@
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>1030</x>
+     <x>800</x>
      <y>180</y>
      <width>181</width>
      <height>111</height>
     </rect>
    </property>
    <property name="title">
-    <string>mp4box</string>
+    <string>MP4Box</string>
    </property>
    <widget class="QWidget" name="verticalLayoutWidget_10">
     <property name="geometry">
@@ -410,21 +335,21 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_10">
      <item>
-      <widget class="QCheckBox" name="checkBox_1">
+      <widget class="QCheckBox" name="checkBox_mp4box">
        <property name="text">
-        <string>使用mp4Box来混流</string>
+        <string>使用MP4Box来混流</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_23">
+      <widget class="QCheckBox" name="checkBox_mp4box_path">
        <property name="text">
-        <string>设置mp4box的路径</string>
+        <string>设置MP4Box的路径</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_6">
+      <widget class="QLineEdit" name="lineEdit_mp4box_path">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;mp4box的路径&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -461,7 +386,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
-        <widget class="QCheckBox" name="checkBox_22">
+        <widget class="QCheckBox" name="checkBox_token">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;设置access_token用以下载TV/APP接口的会员内容&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -471,9 +396,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_5">
+        <widget class="QLineEdit" name="lineEdit_token">
          <property name="placeholderText">
-          <string>access_token</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -482,7 +407,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_8">
        <item>
-        <widget class="QCheckBox" name="checkBox_21">
+        <widget class="QCheckBox" name="checkBox_c">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;设置字符串cookie用以下载网页接口的会员内容&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -492,9 +417,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="lineEdit_c">
          <property name="placeholderText">
-          <string>cookie</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -506,7 +431,7 @@
   <widget class="QGroupBox" name="groupBox_6">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>630</x>
      <y>20</y>
      <width>141</width>
      <height>141</height>
@@ -526,28 +451,28 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <item>
-      <widget class="QCheckBox" name="checkBox_9">
+      <widget class="QCheckBox" name="checkBox_audio_only">
        <property name="text">
         <string>仅下载音频</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_10">
+      <widget class="QCheckBox" name="checkBox_video_only">
        <property name="text">
         <string>仅下载视频</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_11">
+      <widget class="QCheckBox" name="checkBox_sub_only">
        <property name="text">
         <string>仅下载字幕</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_17">
+      <widget class="QCheckBox" name="checkBox_danmaku">
        <property name="text">
         <string>下载弹幕</string>
        </property>
@@ -559,51 +484,93 @@
   <widget class="QGroupBox" name="groupBox_7">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>180</y>
-     <width>221</width>
-     <height>111</height>
+     <x>1230</x>
+     <y>20</y>
+     <width>311</width>
+     <height>271</height>
     </rect>
    </property>
    <property name="title">
     <string>文件名选项</string>
    </property>
-   <widget class="QWidget" name="verticalLayoutWidget_14">
+   <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>179</width>
-      <height>80</height>
+      <y>30</y>
+      <width>291</width>
+      <height>231</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_14">
      <item>
-      <widget class="QCheckBox" name="checkBox_18">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;为文件加入清晰度后缀，如XXX[1080P 高码率]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>文件名包含清晰度后缀</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QCheckBox" name="checkBox_F">
+         <property name="text">
+          <string>单分P</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_F">
+         <property name="placeholderText">
+          <string>&lt;videoTitle&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_12">
-       <property name="text">
-        <string>不给分P序号补零</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="checkBox_M">
+         <property name="text">
+          <string>多分P</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_M">
+         <property name="placeholderText">
+          <string>&lt;videoTitle&gt;/[P&lt;pageNumberWithZero&gt;]&lt;pageTitle&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_19">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;多P时，不要加入分P前缀，如[P1],[P2]等&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>不加入分P前缀</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_18">
+       <item>
+        <widget class="QLabel" name="label_val">
+         <property name="text">
+          <string>内置变量</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="plainTextEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="plainText">
+          <string>&lt;videoTitle&gt;: 视频主标题
+&lt;pageNumber&gt;: 视频分P序号
+&lt;pageNumberWithZero&gt;: 视频分P序号(前缀补零)
+&lt;pageTitle&gt;: 视频分P标题
+&lt;aid&gt;: 视频aid
+&lt;cid&gt;: 视频cid
+&lt;dfn&gt;: 视频清晰度
+&lt;res&gt;: 视频分辨率
+&lt;fps&gt;: 视频帧率
+&lt;videoCodecs&gt;: 视频编码
+&lt;videoBandwidth&gt;: 视频码率
+&lt;audioCodecs&gt;: 音频编码
+&lt;audioBandwidth&gt;: 音频码率</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -611,14 +578,14 @@
   <widget class="QGroupBox" name="groupBox_8">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>310</y>
+     <x>620</x>
+     <y>300</y>
      <width>191</width>
      <height>171</height>
     </rect>
    </property>
    <property name="title">
-    <string>分p</string>
+    <string>分P</string>
    </property>
    <widget class="QWidget" name="verticalLayoutWidget_12">
     <property name="geometry">
@@ -631,7 +598,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_12">
      <item>
-      <widget class="QCheckBox" name="checkBox_5">
+      <widget class="QCheckBox" name="checkBox_p_show_all">
        <property name="text">
         <string>展示所有分P标题</string>
        </property>
@@ -640,22 +607,22 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QCheckBox" name="checkBox_8">
+        <widget class="QCheckBox" name="checkBox_p">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;选择指定分p或分p范围：(-p 8 或 -p 1,2 或 -p 3-5 或 -p ALL)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>指定下载分p</string>
+          <string>指定下载分P</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="lineEdit_p">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;选择指定分p或分p范围：(-p 8 或 -p 1,2 或 -p 3-5 或 -p ALL)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="placeholderText">
-          <string>如1,2或3-5或ALL</string>
+          <string>如1,2或3-5或ALL或NEW</string>
          </property>
         </widget>
        </item>
@@ -664,7 +631,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
-        <widget class="QCheckBox" name="checkBox_24">
+        <widget class="QCheckBox" name="checkBox_p_delay">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;设置下载合集分P之间的下载间隔时间(单位: 秒, 默认无间隔)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -674,7 +641,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_7">
+        <widget class="QLineEdit" name="lineEdit_p_delay">
          <property name="placeholderText">
           <string>0</string>
          </property>
@@ -708,28 +675,28 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_15">
      <item>
-      <widget class="QCheckBox" name="checkBox_4">
+      <widget class="QCheckBox" name="checkBox_ia">
        <property name="text">
         <string>交互式选择清晰度</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="checkBox_info">
        <property name="text">
         <string>仅解析而不进行下载</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
+      <widget class="QCheckBox" name="checkBox_hs">
        <property name="text">
         <string>不显示所有音视频流</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_13">
+      <widget class="QCheckBox" name="checkBox_debug">
        <property name="text">
         <string>输出调试日志</string>
        </property>
@@ -741,7 +708,7 @@
   <widget class="QGroupBox" name="groupBox_10">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>630</x>
      <y>180</y>
      <width>151</width>
      <height>111</height>
@@ -761,21 +728,21 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_16">
      <item>
-      <widget class="QCheckBox" name="checkBox_15">
+      <widget class="QCheckBox" name="checkBox_skip_subtitle">
        <property name="text">
         <string>跳过字幕下载</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_16">
+      <widget class="QCheckBox" name="checkBox_skip_cover">
        <property name="text">
         <string>跳过封面下载</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_14">
+      <widget class="QCheckBox" name="checkBox_skip_mux">
        <property name="text">
         <string>跳过混流步骤</string>
        </property>
@@ -787,10 +754,10 @@
   <widget class="QGroupBox" name="groupBox_11">
    <property name="geometry">
     <rect>
-     <x>850</x>
-     <y>310</y>
+     <x>990</x>
+     <y>180</y>
      <width>221</width>
-     <height>171</height>
+     <height>111</height>
     </rect>
    </property>
    <property name="title">
@@ -802,58 +769,36 @@
       <x>10</x>
       <y>20</y>
       <width>198</width>
-      <height>139</height>
+      <height>81</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_17">
      <item>
-      <widget class="QCheckBox" name="checkBox_7">
+      <widget class="QCheckBox" name="checkBox_mt">
        <property name="text">
         <string>使用多线程下载</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="checkBox_6">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>aria2c的代理地址</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_1">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
-         <item>
-          <widget class="QCheckBox" name="checkBox_20">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;设置混流的音频语言(代码)，如chi, jpn等&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>设置混流的音频语言代码</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_3">
-           <property name="placeholderText">
-            <string>如chi,jpn</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+      <widget class="QCheckBox" name="checkBox_language">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;设置混流的音频语言(代码)，如chi, jpn等&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>设置混流的音频语言代码</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_language">
+       <property name="placeholderText">
+        <string>如chi,jpn</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -862,14 +807,14 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>440</y>
+     <y>420</y>
      <width>571</width>
      <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_5">
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label_bbdown">
       <property name="text">
        <string> BBDown</string>
       </property>
@@ -886,6 +831,252 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>320</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QRadioButton" name="radioButton_p_current">
+      <property name="text">
+       <string>下载当前分P</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_p_all">
+      <property name="text">
+       <string>下载全部分P</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_p_new">
+      <property name="text">
+       <string>下载最新分P</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_14">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>20</y>
+     <width>271</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>下载视频画质</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_dfn_480P">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>50</y>
+      <width>120</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>480P 清晰</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_dfn_more">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>更多</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_dfn_priority">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>249</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>优先下载最高画质</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_dfn_1080P">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>119</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1080P 高清</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_dfn_360P">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>70</y>
+      <width>120</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>360P 流畅</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_dfn_720P">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>119</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>720P 高清</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dfn_more">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>100</y>
+      <width>181</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>优先下载最高画质</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>8K 超高清</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>杜比视界</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>HDR 真彩</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>4K 超清</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1080P 高帧率</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1080P 高码率</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>720P 高帧率</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_12">
+   <property name="geometry">
+    <rect>
+     <x>840</x>
+     <y>300</y>
+     <width>211</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>aria2c</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>196</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_19">
+     <item>
+      <widget class="QCheckBox" name="checkBox_use_aria2c">
+       <property name="text">
+        <string>使用aria2c</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_aria2c_path">
+       <property name="text">
+        <string>aria2c的路径</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_aria2c_path">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_aria2c_proxy">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>aria2c的代理地址</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_aria2c_proxy">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <resources/>

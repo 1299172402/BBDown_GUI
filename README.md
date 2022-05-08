@@ -4,7 +4,7 @@ BBDown的图形化版本，亦保留有命令行
 ## 特性
 
 - [x] 记忆下载参数
-- [x] 下载全部剧集（分片）
+- [x] 下载剧集选项
 - [x] 优先显示常用选项，亦保留有所有功能
 
 ## 下载
@@ -44,8 +44,7 @@ python BBDown_GUI.py
 
 -->
 
-## 相关Repositories
+## 相关Repository
 
  - [BBDown_hk](https://github.com/1299172402/BBDown_hk)
-   (个人站点解析，替换UPOS加速下载，只有从网页端下载有效)
 
