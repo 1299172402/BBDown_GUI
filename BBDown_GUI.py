@@ -185,9 +185,9 @@ class FormMain(QMainWindow, Ui_Form_main):
             args += ' ' + choice[self.comboBox_source.currentIndex()] + ' '
         
         # 下载视频编码选择
-        if self.comboBox_source.currentIndex()!=0:
+        if self.comboBox_encoding.currentIndex()!=0:
             choice = ['', 'AVC', 'AV1', 'HEVC']
-            args += ' --encoding-priority ' + choice[self.comboBox_source.currentIndex()] + ' '
+            args += ' --encoding-priority ' + choice[self.comboBox_encoding.currentIndex()] + ' '
 
         # 指定FFmpeg路径
         if self.checkBox_ffmpeg.isChecked():
@@ -273,6 +273,13 @@ class FormMain(QMainWindow, Ui_Form_main):
 
         # 下载路径
         args += f' --work-dir "{self.lineEdit_dir.text()}" '
+
+        # 测试专用
+        '''
+        if self.advanced and self.checkBox_debug.isChecked():
+            print("[BBDown_GUI_args]")
+            print(args)
+        '''
 
         self.job1 = RunBBDown(args)
         self.job1.start()
