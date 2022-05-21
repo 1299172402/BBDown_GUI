@@ -11,9 +11,20 @@ from UI.about import Ui_Form_about
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPixmap
+from PyQt5 import QtGui
 
 workdir = os.path.dirname(os.path.abspath(sys.argv[0]))
 bbdowndir = os.path.join(workdir, "BBDown.exe")
+
+# 显示图标
+# 单文件打包引入外部资源
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class RunBBDown(QThread):
     def __init__(self, command):
@@ -32,6 +43,9 @@ class FormLogin(QMainWindow, Ui_Form_QRcode):
         super(FormLogin, self).__init__()
         self.arg = arg
         self.setupUi(self)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(resource_path("./UI/favicon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
         self.label_QR.setScaledContents(True)
         if (arg == "login") and (os.path.exists(os.path.join(workdir, "BBDown.data"))):
             os.remove(os.path.join(workdir, "BBDown.data"))
@@ -71,6 +85,9 @@ class FormAbout(QMainWindow, Ui_Form_about):
     def __init__(self):
         super(FormAbout, self).__init__()
         self.setupUi(self)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(resource_path("./UI/favicon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
         
 
 class FormMain(QMainWindow, Ui_Form_main):
@@ -99,6 +116,9 @@ class FormMain(QMainWindow, Ui_Form_main):
         
         super(FormMain, self).__init__()
         self.setupUi(self)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(resource_path("./UI/favicon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
         self.pushButton_login.clicked.connect(self.login)
         self.pushButton_logintv.clicked.connect(self.logintv)
         self.lineEdit_ffmpeg.setText(os.path.join(workdir, "ffmpeg.exe"))

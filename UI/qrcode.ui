@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>二维码登录</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>favicon.ico</normaloff>favicon.ico</iconset>
-  </property>
   <widget class="QLabel" name="label_QR">
    <property name="geometry">
     <rect>

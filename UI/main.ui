@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>BBDown - GUI</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>favicon.ico</normaloff>favicon.ico</iconset>
-  </property>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
