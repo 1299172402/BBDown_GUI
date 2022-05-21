@@ -20,9 +20,12 @@ class RunBBDown(QThread):
         super(RunBBDown, self).__init__()
         self.command = command
     def run(self):
-        # print(f'"{bbdowndir}" {self.command}')
-        p = subprocess.Popen(f'"{bbdowndir}" {self.command}', shell=True)
-        p.wait()
+        try:
+            # print(f'"{bbdowndir}" {self.command}')
+            p = subprocess.Popen(f'"{bbdowndir}" {self.command}', shell=True)
+            p.wait()
+        except:
+            self.exitcode = -1
 
 class FormLogin(QMainWindow, Ui_Form_QRcode):
     def __init__(self, arg):
@@ -113,26 +116,31 @@ class FormMain(QMainWindow, Ui_Form_main):
             Load(self)
         except:
             self.resize(620, 400)
+
+    # 登录（网页端）
     def login(self):
         self.win_login = FormLogin("login")
         self.win_login.show()  
+
+    # 登录（tv端）
     def logintv(self):
         self.win_login = FormLogin("logintv")
-        self.win_login.show()    
+        self.win_login.show()   
+
+    # 设置ffmpeg位置
     def ffmpegpath(self):
         filepath, _ = QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(),
         "ffmpeg (ffmpeg.exe);;All Files (*.*)")
         filepath = filepath.replace("/","\\")
         self.lineEdit_ffmpeg.setText(filepath)
-    def aria2cpath(self):
-        filepath, _ = QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(),
-        "aria2c (aria2c.exe);;All Files (*.*)")
-        filepath = filepath.replace("/","\\")
-        self.lineEdit_aria2c.setText(filepath)
+
+    # 设置下载目录
     def downpath(self):
         downpath = QFileDialog.getExistingDirectory(self, "选择文件夹", os.getcwd())
         downpath = downpath.replace("/","\\")
         self.lineEdit_dir.setText(downpath)
+
+    # 设置BBDown位置
     def bbdownpath(self):
         filepath, _ = QFileDialog.getOpenFileName(self, "选择文件", os.getcwd(), \
         "BBDown (BBDown.exe);;All Files (*.*)")
@@ -140,6 +148,8 @@ class FormMain(QMainWindow, Ui_Form_main):
         self.lineEdit_bbdown.setText(filepath)
         global bbdowndir
         bbdowndir = self.lineEdit_bbdown.text()
+
+    # 开始下载
     def download(self):
         def Save():
             config = {}
@@ -280,10 +290,17 @@ class FormMain(QMainWindow, Ui_Form_main):
             print("[BBDown_GUI_args]")
             print(args)
         '''
+        try:
+            self.job1 = RunBBDown(args)
+            self.job1.start()
+            if self.job1.wait() and self.job1.exitcode == -1:
+                print(self.job1.wait())
+                print(self.job1.exitcode)
+                raise self.job1.exception
+        except:
+            pass
 
-        self.job1 = RunBBDown(args)
-        self.job1.start()
-
+    # 高级选项
     def advanced(self):
         if not self.advanced:
             self.pushButton_advanced.setText("简易选项<")
@@ -293,6 +310,8 @@ class FormMain(QMainWindow, Ui_Form_main):
             self.pushButton_advanced.setText("高级选项>")
             self.resize(620, 400)
             self.advanced = False
+
+    # 关于
     def about(self):
         self.win_about = FormAbout()
         self.win_about.show()
