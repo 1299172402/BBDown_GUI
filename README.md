@@ -4,8 +4,9 @@ BBDown的图形化版本，亦保留有命令行
 ## 特性
 
 - [x] 记忆下载参数
-- [x] 下载剧集选项
+- [x] 下载剧集选项（当前剧集、全部剧集、最新剧集）
 - [x] 优先显示常用选项，亦保留有所有功能
+- [x] 在命令行中仅按一次 Ctrl-C 可以中断本次下载
 
 ## 下载
 [![img](https://img.shields.io/github/release/1299172402/BBDown_GUI?label=版本)](https://github.com/1299172402/BBDown_GUI/releases)
@@ -25,12 +26,11 @@ python BBDown_GUI.py
 
 ### 简易模式
 
-<img src="https://user-images.githubusercontent.com/29673994/152669991-48cc3bc6-0768-4be9-9ae9-c2c77f3b2b59.png" height="50%" width="50%" >
+<img src="https://user-images.githubusercontent.com/29673994/169644975-066c4ac5-7fb1-4361-8c62-bb1e5aba4381.png" height="50%" width="50%" >
 
 ### 高级模式
 
-<img src="https://user-images.githubusercontent.com/29673994/152321101-e780b900-edda-43d2-9601-caf7e695839d.png">
-
+<img src="https://user-images.githubusercontent.com/29673994/169645018-d4af2c4b-fdcf-4288-b19f-25f2eb778a96.png">
 
 ## 致谢&License
 
