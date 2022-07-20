@@ -11,10 +11,23 @@ BBDown的图形化版本，亦保留有命令行
 ## 下载
 [![img](https://img.shields.io/github/release/1299172402/BBDown_GUI?label=版本)](https://github.com/1299172402/BBDown_GUI/releases)
 
+## 从PyPI安装
+
+安装
+```
+pip install BBDown-GUI
+```
+
+运行（不区分大小写，下划线可省略）
+```
+BBDown_GUI
+```
+
 ## 从源码运行
 ```
 pip install -r requirements.txt
-python BBDown_GUI.py
+cd BBDown_GUI # 需要进入到本仓库的同名子文件夹内
+python __main__.py
 ```
 
 ## 使用方法
@@ -35,14 +48,6 @@ python BBDown_GUI.py
 ## 致谢&License
 
  - https://github.com/nilaoda/BBDown (MIT License)
-
-<!--
-
-## 一点感想
-
- - [GUI开坑](https://github.com/1299172402/BBDown_GUI/blob/main/gui_start.md)
-
--->
 
 ## 相关Repository
 

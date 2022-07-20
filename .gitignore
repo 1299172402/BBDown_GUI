@@ -2,6 +2,8 @@
 __pycache__
 config.json
 qrcode.png
+BBDown.data
+BBDownTV.data
 
 # 下载内容
 Download/
