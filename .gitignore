@@ -1,19 +1,18 @@
-config.json
-
-BBDown.exe
-
-UI/__pycache__
 
 __pycache__
-
-Download/
-
-[123456789]*/
-
+config.json
 qrcode.png
 
+# 下载内容
+Download/
+[123456789]*/
+
+# 单文件打包
 output/
-
 output.zip
-
 BBDown*.zip
+
+# 发布到pypi
+BBDown_GUI/*.exe
+BBDown_GUI.egg-info
+dist/

@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include BBDown_GUI/UI/favicon.ico
+include BBDown_GUI/BBDown.exe
+include BBDown_GUI/ffmpeg.exe
+include BBDown_GUI/aria2c.exe
