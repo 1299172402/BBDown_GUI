@@ -8,10 +8,23 @@ BBDown的图形化版本，亦保留有命令行
 - [x] 优先显示常用选项，亦保留有所有功能
 - [x] 在命令行中仅按一次 Ctrl-C 可以中断本次下载
 
+## 使用方法
+
+将 BBDown 的可执行程序与本 UI 程序置于同一文件夹中，直接运行即可。这样以后 BBDown 主程序更新也可以直接替换使用
+
 ## 下载
+
 [![img](https://img.shields.io/github/release/1299172402/BBDown_GUI?label=版本)](https://github.com/1299172402/BBDown_GUI/releases)
 
-## 从PyPI安装
+### 从 [Releases](https://github.com/1299172402/BBDown_GUI/releases) 中下载使用
+
+预打包好的二进制文件，包括
+- BBDown - GUI
+- BBDown
+- FFmpeg
+- Aria2c
+
+### 从PyPI安装使用
 
 安装
 ```
@@ -23,16 +36,11 @@ pip install BBDown-GUI
 BBDown_GUI
 ```
 
-## 从源码运行
+### 从源码运行使用
 ```
 pip install -r requirements.txt
 python -m BBDown_GUI
 ```
-
-## 使用方法
-
-将 BBDown 的可执行程序与本 UI 程序置于同一文件夹中，直接运行即可。这样以后 BBDown 主程序更新也可以直接替换使用
-
 
 ## 屏幕截图
 
