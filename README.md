@@ -26,8 +26,7 @@ BBDown_GUI
 ## 从源码运行
 ```
 pip install -r requirements.txt
-cd BBDown_GUI # 需要进入到本仓库的同名子文件夹内
-python __main__.py
+python -m BBDown_GUI
 ```
 
 ## 使用方法
