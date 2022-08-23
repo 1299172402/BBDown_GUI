@@ -36,8 +36,6 @@ pip install BBDown-GUI
 BBDown_GUI
 ```
 
-注意： [从pipy安装的BBDown_GUI在以普通用户运行时无法登录 #7](https://github.com/1299172402/BBDown_GUI/issues/7)
-
 ### 从源码运行使用
 ```
 pip install -r requirements.txt
