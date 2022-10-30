@@ -268,6 +268,8 @@ class FormMain(QMainWindow, Ui_Form_main):
                 args += ' --skip-cover '
             if self.checkBox_skip_mux.isChecked():
                 args += ' --skip-mux '
+            if self.checkBox_skip_ai.isChecked():
+                args += ' --skip-ai '
 
             # MP4box
             if self.checkBox_mp4box.isChecked():
@@ -278,6 +280,8 @@ class FormMain(QMainWindow, Ui_Form_main):
             # 其他
             if self.checkBox_mt.isChecked():
                 args += ' -mt '
+            if self.checkBox_force_http.isChecked():
+                args += ' --force-http '
             if self.checkBox_language.isChecked():
                 args += f' --language {self.lineEdit_language.text()} '
 
@@ -296,12 +300,23 @@ class FormMain(QMainWindow, Ui_Form_main):
                 args += f' --aria2c-path "{self.lineEdit_aria2c_path.text()}" '
             if self.checkBox_aria2c_proxy.isChecked():
                 args += f' --aria2c-proxy {self.lineEdit_aria2c_proxy.text()} '
+            if self.checkBox_aria2c_args.isChecked():
+                args += f' --aria2c-args "{self.lineEdit_aria2c_args.text()}" '
 
             # 文件名选项
             if self.checkBox_F.isChecked():
                 args += f' -F "{self.lineEdit_F.text()}" '
             if self.checkBox_M.isChecked():
                 args += f' -M "{self.lineEdit_M.text()}" '
+            
+            # 代理
+            if self.checkBox_enable_proxy.isChecked():
+                if self.checkBox_host.isChecked():
+                    args += f' --host {self.lineEdit_host.text()} '
+                if self.checkBox_ep_host.isChecked():
+                    args += f' --ep-host {self.lineEdit_ep_host.text()} '
+                if self.checkBox_area.isChecked():
+                    args += f' --area {self.lineEdit_area.text()} '
 
         # 下载路径
         args += f' --work-dir "{self.lineEdit_dir.text()}" '

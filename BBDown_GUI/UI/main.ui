@@ -314,7 +314,7 @@
      <x>800</x>
      <y>180</y>
      <width>181</width>
-     <height>111</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title">
@@ -326,7 +326,7 @@
       <x>10</x>
       <y>20</y>
       <width>160</width>
-      <height>80</height>
+      <height>101</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -483,7 +483,7 @@
      <x>1230</x>
      <y>20</y>
      <width>311</width>
-     <height>271</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="title">
@@ -495,7 +495,7 @@
       <x>10</x>
       <y>30</y>
       <width>291</width>
-      <height>231</height>
+      <height>251</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -562,7 +562,9 @@
 &lt;videoCodecs&gt;: 视频编码
 &lt;videoBandwidth&gt;: 视频码率
 &lt;audioCodecs&gt;: 音频编码
-&lt;audioBandwidth&gt;: 音频码率</string>
+&lt;audioBandwidth&gt;: 音频码率
+&lt;ownerName&gt;: 上传者名称
+&lt;ownerMid&gt;: 上传者mid</string>
          </property>
         </widget>
        </item>
@@ -574,8 +576,8 @@
   <widget class="QGroupBox" name="groupBox_8">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>300</y>
+     <x>630</x>
+     <y>320</y>
      <width>191</width>
      <height>171</height>
     </rect>
@@ -707,7 +709,7 @@
      <x>630</x>
      <y>180</y>
      <width>151</width>
-     <height>111</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title">
@@ -718,8 +720,8 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>131</width>
-      <height>80</height>
+      <width>135</width>
+      <height>99</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -744,6 +746,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_skip_ai">
+       <property name="text">
+        <string>跳过AI字幕下载</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -753,7 +762,7 @@
      <x>990</x>
      <y>180</y>
      <width>221</width>
-     <height>111</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title">
@@ -764,8 +773,8 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>198</width>
-      <height>81</height>
+      <width>201</width>
+      <height>104</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -775,7 +784,17 @@
         <string>使用多线程下载</string>
        </property>
        <property name="checked">
-        <bool>false</bool>
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_force_http">
+       <property name="text">
+        <string>使用HTTP替换HTTPS</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -1012,8 +1031,8 @@
    <property name="geometry">
     <rect>
      <x>840</x>
-     <y>300</y>
-     <width>211</width>
+     <y>320</y>
+     <width>341</width>
      <height>171</height>
     </rect>
    </property>
@@ -1025,8 +1044,8 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>196</width>
-      <height>141</height>
+      <width>321</width>
+      <height>144</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1038,38 +1057,141 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_aria2c_path">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QCheckBox" name="checkBox_aria2c_path">
+         <property name="text">
+          <string>文件路径</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_aria2c_path">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBox_aria2c_proxy">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>代理地址</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_aria2c_proxy">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QCheckBox" name="checkBox_aria2c_args">
+         <property name="text">
+          <string>附加参数</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_aria2c_args"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_13">
+   <property name="geometry">
+    <rect>
+     <x>1200</x>
+     <y>320</y>
+     <width>341</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>代理</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>321</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QCheckBox" name="checkBox_enable_proxy">
        <property name="text">
-        <string>aria2c的路径</string>
+        <string>启用代理</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_aria2c_path">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="readOnly">
-        <bool>false</bool>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QCheckBox" name="checkBox_host">
+         <property name="text">
+          <string>代理地址</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_host"/>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_aria2c_proxy">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>aria2c的代理地址</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QCheckBox" name="checkBox_ep_host">
+         <property name="text">
+          <string>EP代理</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_ep_host"/>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_aria2c_proxy">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;调用aria2c进行下载时的代理地址配置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="QCheckBox" name="checkBox_area">
+         <property name="text">
+          <string>地区</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_area">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>如hk</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>

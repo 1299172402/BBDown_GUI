@@ -60,3 +60,19 @@ python -m BBDown_GUI
 
  - [BBDown_hk](https://github.com/1299172402/BBDown_hk)
 
+## 更新日志
+
+添加以下参数的支持(BBDown v1.5.4)：
+
+| 参数                        | 功能                                                         |
+| --------------------------- | ------------------------------------------------------------ |
+| --force-http                | 下载音视频时强制使用HTTP协议替换HTTPS(默认开启)              |
+| --skip-ai                   | 跳过AI字幕下载                                               |
+| --aria2c-args <aria2c-args> | 调用aria2c的附加参数(默认参数包含"-x16 -s16 -j16 -k 5M") |
+| --host <host>               | 指定BiliPlus host(**解析服务器能够获取你账号的大部分权限!**)     |
+| --ep-host <ep-host>         | 指定BiliPlus EP host                                         |
+| --area <area>               | 指定BiliPlus area 例: hk(使用BiliPlus需要access_token, 不需要cookie) |
+
+<!-- | [未添加]--bandwith-ascending        | 比特率升序(最小体积优先)                                     | -->
+
+
