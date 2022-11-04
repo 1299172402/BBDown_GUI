@@ -18,3 +18,4 @@ BBDown*.zip
 BBDown_GUI/*.exe
 BBDown_GUI.egg-info
 dist/
+build/

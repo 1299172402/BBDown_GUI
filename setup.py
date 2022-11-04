@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='BBDown_GUI',
-    version='1.0.4',
+    version='1.0.5',
     url='https://github.com/1299172402/BBDown_GUI',
     license='MIT',
     author='之雨',
@@ -23,10 +23,21 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'bbdowngui = BBDown_GUI.__main__:main',
-            'BBDownGUI = BBDown_GUI.__main__:main',
-            'bbdown_gui = BBDown_GUI.__main__:main',
-            'BBDown_GUI = BBDown_GUI.__main__:main',
+            'bbdowngui = BBDown_GUI.gui:main',
+            'BBDownGUI = BBDown_GUI.gui:main',
+            'bbdown_gui = BBDown_GUI.gui:main',
+            'BBDown_GUI = BBDown_GUI.gui:main',
         ],
     },
 )
+
+# 更改version
+# 清空dist文件夹内容
+# py -m pip install --upgrade build
+# py -m build
+# py -m pip install --upgrade twine
+# # 测试服务器
+# # py -m twine upload --repository testpypi dist/*
+# # py -m pip install --index-url https://test.pypi.org/simple/ --no-deps BBDown-GUI
+# 真实服务器
+# py -m twine upload dist/*
