@@ -6,9 +6,9 @@ import time
 import json
 import subprocess
 
-from BBDown_GUI.UI.main import Ui_Form_main
-from BBDown_GUI.UI.qrcode import Ui_Form_QRcode
-from BBDown_GUI.UI.about import Ui_Form_about
+from BBDown_GUI.UI.ui_main import Ui_Form_main
+from BBDown_GUI.UI.ui_qrcode import Ui_Form_QRcode
+from BBDown_GUI.UI.ui_about import Ui_Form_about
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -26,6 +26,10 @@ def resource_path(relative_path):
         base_path = workdir
 
     return os.path.join(base_path, relative_path)
+
+def log(message=''):
+    t = time.time()
+    print(f'[{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t))}.{int(t * 1000) % 1000}] - {message}')
 
 class RunBBDown(QThread):
     signal = pyqtSignal(int)
@@ -131,6 +135,7 @@ class FormMain(QMainWindow, Ui_Form_main):
         self.pushButton_ffmpeg.clicked.connect(self.ffmpegpath)
         self.pushButton_dir.clicked.connect(self.downpath)
         self.pushButton_bbdown.clicked.connect(self.bbdownpath)
+        self.pushButton_param.clicked.connect(self.param)
         self.pushButton_download.clicked.connect(self.download)
         self.pushButton_advanced.clicked.connect(self.advanced)
         self.advanced = False
@@ -171,25 +176,8 @@ class FormMain(QMainWindow, Ui_Form_main):
         global bbdowndir
         bbdowndir = self.lineEdit_bbdown.text()
 
-    # 开始下载
-    def download(self):
-        def Save():
-            config = {}
-            for i in dir(self):
-                if i[:9]=="checkBox_":
-                    exec(f"config[i] = self.{i}.isChecked()")
-                elif i[:12]=="radioButton_":
-                    exec(f"config[i] = self.{i}.isChecked()")
-                elif i[:9]=="lineEdit_":
-                    exec(f"config[i] = self.{i}.text()")
-                elif i[:9]=="comboBox_":
-                    exec(f"config[i] = self.{i}.currentIndex()")
-            config["advanced"] = self.advanced
-            f = open(os.path.join(workdir, "config.json"), "w")
-            f.write(json.dumps(config, indent=4))
-            f.close()
-
-        Save()
+    # 获取下载参数（有返回值）
+    def arg(self):
         args = ''
 
         # 下载地址
@@ -321,12 +309,38 @@ class FormMain(QMainWindow, Ui_Form_main):
         # 下载路径
         args += f' --work-dir "{self.lineEdit_dir.text()}" '
 
+        return args
+
+    def param(self):
+        args = self.arg()
+        self.lineEdit_param.setText(args)
+
+    # 开始下载
+    def download(self):
+        def Save():
+            config = {}
+            for i in dir(self):
+                if i[:9]=="checkBox_":
+                    exec(f"config[i] = self.{i}.isChecked()")
+                elif i[:12]=="radioButton_":
+                    exec(f"config[i] = self.{i}.isChecked()")
+                elif i[:9]=="lineEdit_":
+                    exec(f"config[i] = self.{i}.text()")
+                elif i[:9]=="comboBox_":
+                    exec(f"config[i] = self.{i}.currentIndex()")
+            config["advanced"] = self.advanced
+            f = open(os.path.join(workdir, "config.json"), "w")
+            f.write(json.dumps(config, indent=4))
+            f.close()
+
+        Save()
+        args = self.arg()
+
         # 测试专用
-        '''
         if self.advanced and self.checkBox_debug.isChecked():
-            print("[BBDown_GUI_args]")
-            print(args)
-        '''
+            log('BBDown GUI 启动下载任务')
+            log(f"运行参数: {args}") 
+
         try:
             self.job_down = RunBBDown(args)
             self.job_down.start()

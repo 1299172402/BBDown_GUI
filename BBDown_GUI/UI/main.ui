@@ -269,7 +269,7 @@
   <widget class="QPushButton" name="pushButton_download">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>508</x>
      <y>360</y>
      <width>93</width>
      <height>28</height>
@@ -282,7 +282,7 @@
   <widget class="QPushButton" name="pushButton_advanced">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>409</x>
      <y>360</y>
      <width>93</width>
      <height>28</height>
@@ -831,12 +831,19 @@
     <item>
      <widget class="QLabel" name="label_bbdown">
       <property name="text">
-       <string> BBDown</string>
+       <string>程序位置</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_bbdown"/>
+     <widget class="QLineEdit" name="lineEdit_bbdown">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;BBDown 程序位置&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_bbdown">
@@ -1142,6 +1149,9 @@
        <property name="text">
         <string>启用代理</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -1163,7 +1173,7 @@
        <item>
         <widget class="QCheckBox" name="checkBox_ep_host">
          <property name="text">
-          <string>EP代理</string>
+          <string>番剧代理</string>
          </property>
         </widget>
        </item>
@@ -1177,7 +1187,7 @@
        <item>
         <widget class="QCheckBox" name="checkBox_area">
          <property name="text">
-          <string>地区</string>
+          <string>地区指定</string>
          </property>
         </widget>
        </item>
@@ -1195,6 +1205,35 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_6">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>460</y>
+     <width>571</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_12">
+    <item>
+     <widget class="QLabel" name="label_param">
+      <property name="text">
+       <string>运行参数</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_param"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_param">
+      <property name="text">
+       <string>生成</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
