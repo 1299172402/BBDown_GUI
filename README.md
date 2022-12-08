@@ -14,7 +14,7 @@ BBDown的图形化版本，亦保留有命令行
 
 ## 下载
 
-### 从 [Releases](https://github.com/1299172402/BBDown_GUI/releases) 中下载使用 [![img](https://img.shields.io/github/v/release/1299172402/BBDown_GUI?label=%E7%89%88%E6%9C%AC)](https://github.com/1299172402/BBDown_GUI/releases) [![](https://img.shields.io/github/downloads/1299172402/BBDown_GUI/total?label=%E4%B8%8B%E8%BD%BD%E9%87%8F)](https://github.com/1299172402/BBDown_GUI/releases)
+### 从 [Releases](https://github.com/1299172402/BBDown_GUI/releases) 中下载使用 [![img](https://img.shields.io/github/v/release/1299172402/BBDown_GUI?label=%E7%89%88%E6%9C%AC)](https://github.com/1299172402/BBDown_GUI/releases) 
 
 预打包好的二进制文件，包括
 - BBDown - GUI
@@ -22,7 +22,7 @@ BBDown的图形化版本，亦保留有命令行
 - FFmpeg
 - Aria2c
 
-### 从 [PyPI](https://pypi.org/project/BBDown-GUI/) 安装使用  [![](https://img.shields.io/pypi/v/BBDown_GUI)](https://pypi.org/project/BBDown-GUI/) [![](https://img.shields.io/pypi/dm/BBDown_GUI?label=%E4%B8%8B%E8%BD%BD%E9%87%8F)](https://pypi.org/project/BBDown-GUI/)
+### 从 [PyPI](https://pypi.org/project/BBDown-GUI/) 安装使用  [![](https://img.shields.io/pypi/v/BBDown_GUI)](https://pypi.org/project/BBDown-GUI/) 
 
 安装
 
