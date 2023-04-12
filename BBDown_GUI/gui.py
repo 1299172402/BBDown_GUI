@@ -183,7 +183,7 @@ class FormMain(QMainWindow, Ui_Form_main):
         args = ''
 
         # 下载地址
-        args += f' {self.lineEdit_url.text()} '
+        args += f' "{self.lineEdit_url.text()}" '
 
         # 画质选择
         if self.radioButton_dfn_priority.isChecked():
