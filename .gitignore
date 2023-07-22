@@ -16,6 +16,7 @@ Download/
 output/
 output.zip
 BBDown*.zip
+*.spec
 
 # 发布到pypi
 BBDown_GUI/*.exe
