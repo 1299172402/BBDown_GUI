@@ -34,36 +34,47 @@ jobs:
         mv build-to-exe.exe BBDown_GUI.exe
     - name: Download ffmpeg
       run: |
-        mkdir temp
-        Invoke-WebRequest -Uri https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest
+        mkdir temp > $null
         $url = "https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest"
         $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
-        $name = $response.name
-        Write-Host FFmpeg-Version: $name
+        Write-Host FFmpeg-Version: $response.name
+        Write-Host FFmpeg-Version-Website: $response.html_url
         Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile temp/ffmpeg-master-latest-win64-gpl.zip
         Expand-Archive -Path temp/ffmpeg-master-latest-win64-gpl.zip -DestinationPath ./temp
         mv temp/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe dist/ffmpeg.exe
         Remove-Item -Recurse -Force ./temp
     - name: Download BBDown
       run: |
-        mkdir temp
-        Invoke-WebRequest -Uri https://api.github.com/repos/nilaoda/BBDown/releases/latest
+        mkdir temp > $null
         $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
         $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
-        $name = $response.name
-        Write-Host BBDown-Version: $name
-        Invoke-WebRequest -Uri https://github.com/nilaoda/BBDown/releases/download/1.6.0/BBDown_1.6.0_20230715_win-x64.zip -OutFile temp/BBDown_win-x64.zip
+        Write-Host BBDown-Version: $response.name
+        Write-Host BBDown-Version-Website: $response.html_url
+        $asset = $response.assets | Where-Object { $_.name -like "*win-x64*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host BBDown-Download-Url: $browser_download_url
+        
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/BBDown_win-x64.zip
         Expand-Archive -Path temp/BBDown_win-x64.zip -DestinationPath ./temp
         mv temp/BBDown.exe dist/BBDown.exe
         Remove-Item -Recurse -Force ./temp  
     - name: Download aria2
       run: |
-        mkdir temp
-        Invoke-WebRequest -Uri https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip -OutFile temp/aria2-win-64bit.zip
+        mkdir temp > $null
+        $url = "https://api.github.com/repos/aria2/aria2/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        Write-Host Aria2-Version: $response.name
+        Write-Host Aria2-Version-Website: $response.html_url
+        $asset = $response.assets | Where-Object { $_.name -like "*win-64bit*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host Aria2-Download-Url: $browser_download_url
+
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/aria2-win-64bit.zip
         Expand-Archive -Path temp/aria2-win-64bit.zip -DestinationPath ./temp
         mv temp/aria2-*/aria2c.exe dist/aria2c.exe
         Remove-Item -Recurse -Force ./temp
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
+        name: BBDown_GUI
         path: dist
