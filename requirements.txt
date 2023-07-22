@@ -1,1 +1,4 @@
 PyQt5==5.15.6
+
+# qtdesigner (in development)
+# pyqt5-tools

@@ -1,5 +1,8 @@
-
+# 编辑器配置
 __pycache__
+.venv/
+
+# 运行过程中文件
 config.json
 qrcode.png
 BBDown.data
