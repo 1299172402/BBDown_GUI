@@ -1,0 +1,69 @@
+name: Pack Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    - name: build py to exe
+      run: |
+        pyinstaller --noconfirm --onefile --console --icon "./BBDown_GUI/UI/favicon.ico" --add-data "./BBDown_GUI/UI/favicon.ico;./UI"  "./build-to-exe.py"
+    - name: Collect build file
+      run: |
+        cd dist
+        mv build-to-exe.exe BBDown_GUI.exe
+    - name: Download ffmpeg
+      run: |
+        mkdir temp
+        Invoke-WebRequest -Uri https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest
+        $url = "https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $name = $response.name
+        Write-Host FFmpeg-Version: $name
+        Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile temp/ffmpeg-master-latest-win64-gpl.zip
+        Expand-Archive -Path temp/ffmpeg-master-latest-win64-gpl.zip -DestinationPath ./temp
+        mv temp/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe dist/ffmpeg.exe
+        Remove-Item -Recurse -Force ./temp
+    - name: Download BBDown
+      run: |
+        mkdir temp
+        Invoke-WebRequest -Uri https://api.github.com/repos/nilaoda/BBDown/releases/latest
+        $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $name = $response.name
+        Write-Host BBDown-Version: $name
+        Invoke-WebRequest -Uri https://github.com/nilaoda/BBDown/releases/download/1.6.0/BBDown_1.6.0_20230715_win-x64.zip -OutFile temp/BBDown_win-x64.zip
+        Expand-Archive -Path temp/BBDown_win-x64.zip -DestinationPath ./temp
+        mv temp/BBDown.exe dist/BBDown.exe
+        Remove-Item -Recurse -Force ./temp  
+    - name: Download aria2
+      run: |
+        mkdir temp
+        Invoke-WebRequest -Uri https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip -OutFile temp/aria2-win-64bit.zip
+        Expand-Archive -Path temp/aria2-win-64bit.zip -DestinationPath ./temp
+        mv temp/aria2-*/aria2c.exe dist/aria2c.exe
+        Remove-Item -Recurse -Force ./temp
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        path: dist
