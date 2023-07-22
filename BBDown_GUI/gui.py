@@ -259,7 +259,9 @@ class FormMain(QMainWindow, Ui_Form_main):
             if self.checkBox_skip_mux.isChecked():
                 args += ' --skip-mux '
             if self.checkBox_skip_ai.isChecked():
-                args += ' --skip-ai '
+                args += ' --skip-ai false '
+            else:
+                args += ' --skip-ai true '
 
             # MP4box
             if self.checkBox_mp4box.isChecked():
