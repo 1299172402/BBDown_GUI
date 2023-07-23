@@ -41,6 +41,14 @@ pip install -r requirements.txt
 python -m BBDown_GUI
 ```
 
+### 从[持续集成](https://github.com/1299172402/BBDown_GUI/actions/workflows/build.yml)中下载(beta version) [![Pack Python application](https://github.com/1299172402/BBDown_GUI/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/1299172402/BBDown_GUI/actions/workflows/build.yml)
+进入Actions，选择Pack Python application，进入需要下载的工作流
+![image](https://github.com/1299172402/BBDown_GUI/assets/29673994/d7944b79-ae96-4c6a-9892-f8e7d3238a61)
+到下方Artifacts下载BBDown_GUI
+![image](https://github.com/1299172402/BBDown_GUI/assets/29673994/45c92ba5-80cc-47db-b5cc-8abe23de2078)
+
+
+
 ## 屏幕截图
 
 ### 简易模式
