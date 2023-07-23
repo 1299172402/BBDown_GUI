@@ -7,6 +7,7 @@ import subprocess
 from BBDown_GUI.UI.ui_main import Ui_Form_main
 from BBDown_GUI.UI.ui_qrcode import Ui_Form_QRcode
 from BBDown_GUI.UI.ui_about import Ui_Form_about
+from BBDown_GUI.UI.ui_output import Ui_Form_output
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -33,16 +34,6 @@ def log(message=''):
     t = time.time()
     print(f'[{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t))}.{int(t * 1000) % 1000}] - {message}')
 
-class RunBBDown(QThread):
-    signal = pyqtSignal(int)
-    def __init__(self, command):
-        super(RunBBDown, self).__init__()
-        self.command = command
-        self.p = None
-    def run(self):
-        self.p = subprocess.Popen(f'"{bbdowndir}" {self.command}', shell=True)
-        self.p.wait()
-
 class FormLogin(QMainWindow, Ui_Form_QRcode):
     def __init__(self, arg):
         super(FormLogin, self).__init__()
@@ -56,8 +47,7 @@ class FormLogin(QMainWindow, Ui_Form_QRcode):
             os.remove(os.path.join(workdir, "BBDown.data"))
         if (arg == "logintv") and (os.path.exists(os.path.join(workdir, "BBDownTV.data"))):
             os.remove(os.path.join(workdir, "BBDownTV.data"))
-        self.job1 = RunBBDown(self.arg)
-        self.job1.start()
+        subprocess.Popen(f'"{bbdowndir}" {self.arg}', shell=False)
         self.execute()
     def execute(self):
         self.work = workthread(self.arg)
@@ -68,8 +58,56 @@ class FormLogin(QMainWindow, Ui_Form_QRcode):
         # self.label_QR.setPixmap(QPixmap(os.path.join(workdir, "qrcode.png")))
         self.label_QR.setPixmap(QPixmap(os.path.join(os.getcwd(), "qrcode.png")))
         self.label.setText(s)
-        if s == "0":
+        if s == "关闭窗口":
             self.close()
+
+class DownloadThread(QThread):
+    output_signal = pyqtSignal(str)
+    def __init__(self, args) -> None:
+        super().__init__()
+        # Run the command and capture its output
+        self.p = subprocess.Popen(f'"{bbdowndir}" {args}', shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    def run(self):
+        # Read the output line by line and display it in real-time
+        while True:
+            out = self.p.stdout.readline().decode("gbk")
+            if out == '' and self.p.poll() is not None:
+                break
+            if out:
+                self.output_signal.emit(out)
+                
+class FormOutput(QMainWindow, Ui_Form_output):
+    def __init__(self, args):
+        super(FormOutput, self).__init__()
+        self.setupUi(self)
+        self.args = args
+        icon = QIcon()
+        icon.addPixmap(QPixmap(resource_path("./UI/favicon.ico")), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
+        self.lineEdit_cmd.setText(self.args)
+        self.lineEdit_cmd.setCursorPosition(0) # Set the cursor to the beginning
+        self.pushButton_stop.clicked.connect(self.stop)
+        self.flag_stop = False
+        self.execute()
+    def execute(self):
+        self.work = DownloadThread(self.args)
+        self.work.start()
+        self.work.output_signal.connect(self.display)
+    def display(self, message):
+        self.textEdit_output.setText(self.textEdit_output.toPlainText() + message.strip() + '\n')
+        self.textEdit_output.verticalScrollBar().setValue(self.textEdit_output.verticalScrollBar().maximum())
+    def stop(self):
+        if self.flag_stop == True:
+            return
+        else:
+            self.work.p.kill()
+            self.work.p.terminate()
+            self.work.p.wait()
+            self.work.terminate()
+            self.display("")
+            self.display("")
+            self.display("[BBDown_GUI] 下载已停止")
+            self.flag_stop = True
 
 class workthread(QThread):
     signal = pyqtSignal(str)
@@ -83,7 +121,7 @@ class workthread(QThread):
                ((self.arg == "logintv") and (os.path.exists(os.path.join(workdir, "BBDownTV.data"))))):
                 self.signal.emit("登录成功")
                 time.sleep(1)
-                self.signal.emit("0")
+                self.signal.emit("关闭窗口")
                 break
             elif os.path.exists(os.path.join(os.getcwd(), "qrcode.png")):
                 self.signal.emit("请扫描二维码")
@@ -340,21 +378,8 @@ class FormMain(QMainWindow, Ui_Form_main):
         Save()
         args = self.arg()
 
-        # 测试专用
-        if self.advanced and self.checkBox_debug.isChecked():
-            log('BBDown GUI 启动下载任务')
-            log(f"运行参数: {args}") 
-
-        try:
-            self.job_down = RunBBDown(args)
-            self.job_down.start()
-            # .wait 会使GUI在下载时卡住，只有在结束或终止了下载过程后才能恢复
-            # 但是可以捕获 Ctrl-C 的异常，以便终止下载而不退出程序
-            # 后续需要改进
-            self.job_down.wait()
-        except:
-            print('[EXCEPT] Process terminated.')
-            pass
+        self.win_output = FormOutput(args)
+        self.win_output.show()
 
 
     # 高级选项
