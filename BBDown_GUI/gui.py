@@ -170,7 +170,7 @@ class FormMain(QMainWindow, Ui_Form_main):
         self.lineEdit_dir.setText(os.path.join(workdir, "Download"))
         self.lineEdit_bbdown.setText(bbdowndir)
         self.pushButton_ffmpeg.clicked.connect(self.ffmpegpath)
-        self.pushButton_dir.clicked.connect(self.downpath)
+        self.pushButton_dir.clicked.connect(self.opendownpath)
         self.pushButton_bbdown.clicked.connect(self.bbdownpath)
         self.pushButton_param.clicked.connect(self.param)
         self.pushButton_download.clicked.connect(self.download)
@@ -200,10 +200,10 @@ class FormMain(QMainWindow, Ui_Form_main):
         self.lineEdit_ffmpeg.setText(filepath)
 
     # 设置下载目录
-    def downpath(self):
-        downpath = QFileDialog.getExistingDirectory(self, "选择文件夹", os.getcwd())
-        downpath = downpath.replace("/","\\")
-        self.lineEdit_dir.setText(downpath)
+    def opendownpath(self):
+        if not os.path.exists(self.lineEdit_dir.text()):
+            os.makedirs(self.lineEdit_dir.text())
+        os.startfile(self.lineEdit_dir.text())
 
     # 设置BBDown位置
     def bbdownpath(self):
