@@ -47,7 +47,7 @@ class FormLogin(QMainWindow, Ui_Form_QRcode):
             os.remove(os.path.join(workdir, "BBDown.data"))
         if (arg == "logintv") and (os.path.exists(os.path.join(workdir, "BBDownTV.data"))):
             os.remove(os.path.join(workdir, "BBDownTV.data"))
-        subprocess.Popen(f'"{bbdowndir}" {self.arg}', shell=False)
+        subprocess.Popen(f'"{bbdowndir}" {self.arg}', shell=True)
         self.execute()
     def execute(self):
         self.work = workthread(self.arg)
@@ -66,7 +66,7 @@ class DownloadThread(QThread):
     def __init__(self, args) -> None:
         super().__init__()
         # Run the command and capture its output
-        self.p = subprocess.Popen(f'"{bbdowndir}" {args}', shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        self.p = subprocess.Popen(f'"{bbdowndir}" {args}', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     def run(self):
         # Read the output line by line and display it in real-time
         while True:
@@ -100,10 +100,7 @@ class FormOutput(QMainWindow, Ui_Form_output):
         if self.flag_stop == True:
             return
         else:
-            self.work.p.kill()
-            self.work.p.terminate()
-            self.work.p.wait()
-            self.work.terminate()
+            subprocess.Popen(['taskkill', '/F', '/T', '/PID',  str(self.work.p.pid)], shell=True)
             self.display("")
             self.display("")
             self.display("[BBDown_GUI] 下载已停止")
