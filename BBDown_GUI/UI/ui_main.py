@@ -528,6 +528,7 @@ class Ui_Form_main(object):
 "<pageNumber>: 视频分P序号\n"
 "<pageNumberWithZero>: 视频分P序号(前缀补零)\n"
 "<pageTitle>: 视频分P标题\n"
+"<bvid>: 视频BV号\n"
 "<aid>: 视频aid\n"
 "<cid>: 视频cid\n"
 "<dfn>: 视频清晰度\n"
@@ -538,7 +539,9 @@ class Ui_Form_main(object):
 "<audioCodecs>: 音频编码\n"
 "<audioBandwidth>: 音频码率\n"
 "<ownerName>: 上传者名称\n"
-"<ownerMid>: 上传者mid"))
+"<ownerMid>: 上传者mid\n"
+"<publishDate>: 发布时间\n"
+"<apiType>: API类型(TV/APP/INTL/WEB)"))
         self.groupBox_8.setTitle(_translate("Form_main", "分P"))
         self.checkBox_p_show_all.setText(_translate("Form_main", "展示所有分P标题"))
         self.checkBox_p.setToolTip(_translate("Form_main", "<html><head/><body><p>选择指定分p或分p范围：(-p 8 或 -p 1,2 或 -p 3-5 或 -p ALL)</p></body></html>"))
