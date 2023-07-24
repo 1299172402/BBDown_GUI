@@ -16,6 +16,105 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: mkdir dist
+      run: |
+        mkdir dist > $null
+    
+    - name: Update BBDown_GUI version
+      run: |
+        $version = $env:GITHUB_REF_NAME
+        Write-Host BBDown_GUI-Version: $version
+
+        # Replace BBDown_GUI version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-gui-version\$', "$version"} | Set-Content $filePath
+
+    - name: Download ffmpeg
+      run: |
+        mkdir temp > $null
+
+        # Get latest ffmpeg version and website
+        $url = "https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $tag = $version
+        $tag = $tag.Replace("Latest Auto-Build (", "autobuild-")
+        $tag = $tag.Replace(" ", "-")
+        $tag = $tag.Replace(":", "-")
+        $tag = $tag.Replace(")", "")
+        $website = "https://github.com/BtbN/FFmpeg-Builds/releases/tag/$tag"
+        Write-Host FFmpeg-Version: $version
+        Write-Host FFmpeg-Version-Website: $website
+
+        # Replace ffmpeg version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$ffmpeg-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$ffmpeg-version-url\$', "$website"} | Set-Content $filePath
+
+        # Download ffmpeg
+        $browser_download_url = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip"
+        Write-Host FFmpeg-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/ffmpeg-master-latest-win64-gpl.zip
+        Expand-Archive -Path temp/ffmpeg-master-latest-win64-gpl.zip -DestinationPath ./temp
+        mv temp/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe dist/ffmpeg.exe
+
+        Remove-Item -Recurse -Force ./temp
+
+    - name: Download BBDown
+      run: |
+        mkdir temp > $null
+
+        # Get latest BBDown version and website
+        $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $website = $response.html_url
+        Write-Host BBDown-Version: $version
+        Write-Host BBDown-Version-Website: $website
+
+        # Replace BBDown version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-version-url\$', "$website"} | Set-Content $filePath
+
+        # Download BBDown
+        $asset = $response.assets | Where-Object { $_.name -like "*win-x64*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host BBDown-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/BBDown_win-x64.zip
+        Expand-Archive -Path temp/BBDown_win-x64.zip -DestinationPath ./temp
+        mv temp/BBDown.exe dist/BBDown.exe
+
+        Remove-Item -Recurse -Force ./temp  
+
+    - name: Download aria2
+      run: |
+        mkdir temp > $null
+
+        # Get latest aria2 version and website
+        $url = "https://api.github.com/repos/aria2/aria2/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $website = $response.html_url
+        Write-Host Aria2-Version: $version
+        Write-Host Aria2-Version-Website: $website
+
+        # Replace aria2 version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$aria2c-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$aria2c-version-url\$', "$website"} | Set-Content $filePath
+
+        # Download aria2
+        $asset = $response.assets | Where-Object { $_.name -like "*win-64bit*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host Aria2-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/aria2-win-64bit.zip
+        Expand-Archive -Path temp/aria2-win-64bit.zip -DestinationPath ./temp
+        mv temp/aria2-*/aria2c.exe dist/aria2c.exe
+
+        Remove-Item -Recurse -Force ./temp
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -28,51 +127,10 @@ jobs:
     - name: build py to exe
       run: |
         pyinstaller --noconfirm --onefile --noconsole --icon "./BBDown_GUI/UI/favicon.ico" --add-data "./BBDown_GUI/UI/favicon.ico;./UI"  "./build-to-exe.py"
-    - name: Collect build file
+    - name: Rename build file
       run: |
         cd dist
         mv build-to-exe.exe BBDown_GUI.exe
-    - name: Download ffmpeg
-      run: |
-        mkdir temp > $null
-        $url = "https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest"
-        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
-        Write-Host FFmpeg-Version: $response.name
-        Write-Host FFmpeg-Version-Website: $response.html_url
-        Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile temp/ffmpeg-master-latest-win64-gpl.zip
-        Expand-Archive -Path temp/ffmpeg-master-latest-win64-gpl.zip -DestinationPath ./temp
-        mv temp/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe dist/ffmpeg.exe
-        Remove-Item -Recurse -Force ./temp
-    - name: Download BBDown
-      run: |
-        mkdir temp > $null
-        $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
-        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
-        Write-Host BBDown-Version: $response.name
-        Write-Host BBDown-Version-Website: $response.html_url
-        $asset = $response.assets | Where-Object { $_.name -like "*win-x64*" }
-        $browser_download_url = $asset.browser_download_url
-        Write-Host BBDown-Download-Url: $browser_download_url
-        
-        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/BBDown_win-x64.zip
-        Expand-Archive -Path temp/BBDown_win-x64.zip -DestinationPath ./temp
-        mv temp/BBDown.exe dist/BBDown.exe
-        Remove-Item -Recurse -Force ./temp  
-    - name: Download aria2
-      run: |
-        mkdir temp > $null
-        $url = "https://api.github.com/repos/aria2/aria2/releases/latest"
-        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
-        Write-Host Aria2-Version: $response.name
-        Write-Host Aria2-Version-Website: $response.html_url
-        $asset = $response.assets | Where-Object { $_.name -like "*win-64bit*" }
-        $browser_download_url = $asset.browser_download_url
-        Write-Host Aria2-Download-Url: $browser_download_url
-
-        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/aria2-win-64bit.zip
-        Expand-Archive -Path temp/aria2-win-64bit.zip -DestinationPath ./temp
-        mv temp/aria2-*/aria2c.exe dist/aria2c.exe
-        Remove-Item -Recurse -Force ./temp
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
