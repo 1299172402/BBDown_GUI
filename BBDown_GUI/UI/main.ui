@@ -554,6 +554,7 @@
 &lt;pageNumber&gt;: 视频分P序号
 &lt;pageNumberWithZero&gt;: 视频分P序号(前缀补零)
 &lt;pageTitle&gt;: 视频分P标题
+&lt;bvid&gt;: 视频BV号
 &lt;aid&gt;: 视频aid
 &lt;cid&gt;: 视频cid
 &lt;dfn&gt;: 视频清晰度
@@ -564,7 +565,9 @@
 &lt;audioCodecs&gt;: 音频编码
 &lt;audioBandwidth&gt;: 音频码率
 &lt;ownerName&gt;: 上传者名称
-&lt;ownerMid&gt;: 上传者mid</string>
+&lt;ownerMid&gt;: 上传者mid
+&lt;publishDate&gt;: 发布时间
+&lt;apiType&gt;: API类型(TV/APP/INTL/WEB)</string>
          </property>
         </widget>
        </item>
