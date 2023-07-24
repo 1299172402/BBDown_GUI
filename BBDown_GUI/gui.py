@@ -306,13 +306,9 @@ class FormMain(QMainWindow, Ui_Form_main):
 
             # 其他
             if self.checkBox_mt.isChecked():
-                args += ' -mt true '
-            else:
-                args += ' -mt false '
+                args += ' -mt '
             if self.checkBox_force_http.isChecked():
-                args += ' --force-http  true '
-            else:
-                args += ' --force-http  false '
+                args += ' --force-http '
             if self.checkBox_language.isChecked():
                 args += f' --language {self.lineEdit_language.text()} '
 
