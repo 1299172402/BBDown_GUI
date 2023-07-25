@@ -11,7 +11,7 @@ setup(
     long_description=''.join(open('README.md', encoding='utf-8').readlines()),
     long_description_content_type='text/markdown',
     keywords=['gui', 'bbdown', 'bilibili', 'download'],
-    packages=['BBDown_GUI', 'BBDown_GUI.UI'],
+    packages=['BBDown_GUI', 'BBDown_GUI.UI', 'BBDown_GUI.Form'],
     include_package_data=True,
     install_requires=['PyQt5==5.15.6'],
     python_requires='>=3.6',
