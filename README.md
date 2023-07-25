@@ -1,5 +1,5 @@
 # BBDown_GUI
-BBDown的图形化版本
+BBDown的图形化版本 - 哔哩哔哩视频下载 - bilibili video download
 
 ## 屏幕截图
 
