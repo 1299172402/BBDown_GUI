@@ -12,6 +12,11 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      pypi-version:
+        required: false
+        type: string
+    
 
 permissions:
   contents: read
@@ -28,7 +33,12 @@ jobs:
     
     - name: Update BBDown_GUI version
       run: |
-        $version = "$(git describe --tags --abbrev=0)"
+        if ( $${{ inputs.pypi-version == null}} ){
+          $version = "$(git describe --tags --abbrev=0)"
+        }
+        else {
+          $version = "${{ inputs.pypi-version }}"
+        }
         Write-Host BBDown_GUI-Version: $version
 
         # Replace BBDown_GUI version in ui_about.py
