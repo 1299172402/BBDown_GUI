@@ -30,7 +30,7 @@ jobs:
     - name: Update BBDown_GUI version
       run: |
         $version = ""
-        if (${{ github.event.inputs.doRelease == 'true' }}) {
+        if ( $${{ github.event.inputs.doRelease == 'true' }} ) {
           $version = "$(git describe --tags --abbrev=0)"
         } else {
           $version = "$(git describe --tags --always)"
