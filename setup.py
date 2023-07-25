@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='BBDown_GUI',
-    version='1.0.5',
+    version='$pypi-version$',
     url='https://github.com/1299172402/BBDown_GUI',
     license='MIT',
     author='之雨',
@@ -40,4 +40,4 @@ setup(
 # # py -m twine upload --repository testpypi dist/*
 # # py -m pip install --index-url https://test.pypi.org/simple/ --no-deps BBDown-GUI
 # 真实服务器
-# py -m twine upload dist/*
+# py -m twine upload dist/* -u __token__ -p <your_token>
