@@ -1,0 +1,139 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Update BBDown_GUI version
+      run: |
+        $version = "$(git describe --tags --abbrev=0)"
+        Write-Host BBDown_GUI-Version: $version
+
+        # Replace BBDown_GUI version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-gui-version\$', "$version"} | Set-Content $filePath
+        
+        # Replace BBDown_GUI version in setup.py
+        $filePath = "./setup.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$pypi-version\$', "$version"} | Set-Content $filePath
+
+    - name: Update FFmpeg version
+      run: |
+        # Get latest ffmpeg version and website
+        $url = "https://api.github.com/repos/BtbN/FFmpeg-Builds/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $tag = $version
+        $tag = $tag.Replace("Latest Auto-Build (", "autobuild-")
+        $tag = $tag.Replace(" ", "-")
+        $tag = $tag.Replace(":", "-")
+        $tag = $tag.Replace(")", "")
+        $website = "https://github.com/BtbN/FFmpeg-Builds/releases/tag/$tag"
+        Write-Host FFmpeg-Version: $version
+        Write-Host FFmpeg-Version-Website: $website
+
+        # Replace ffmpeg version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$ffmpeg-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$ffmpeg-version-url\$', "$website"} | Set-Content $filePath
+
+        # Download ffmpeg
+        mkdir temp > $null
+        $browser_download_url = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip"
+        Write-Host FFmpeg-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/ffmpeg-master-latest-win64-gpl.zip
+        Expand-Archive -Path temp/ffmpeg-master-latest-win64-gpl.zip -DestinationPath ./temp
+        mv temp/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe BBDown_GUI/ffmpeg.exe
+        Remove-Item -Recurse -Force ./temp
+
+    - name: Update BBDown version
+      run: |
+        # Get latest BBDown version and website
+        $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $website = $response.html_url
+        Write-Host BBDown-Version: $version
+        Write-Host BBDown-Version-Website: $website
+
+        # Replace BBDown version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$bbdown-version-url\$', "$website"} | Set-Content $filePath
+
+        # Download BBDown
+        mkdir temp > $null
+        $url = "https://api.github.com/repos/nilaoda/BBDown/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $asset = $response.assets | Where-Object { $_.name -like "*win-x64*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host BBDown-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/BBDown_win-x64.zip
+        Expand-Archive -Path temp/BBDown_win-x64.zip -DestinationPath ./temp
+        mv temp/BBDown.exe BBDown_GUI/BBDown.exe
+        Remove-Item -Recurse -Force ./temp  
+
+    - name: Update aria2 version
+      run: |
+        # Get latest aria2 version and website
+        $url = "https://api.github.com/repos/aria2/aria2/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $version = $response.name
+        $website = $response.html_url
+        Write-Host Aria2-Version: $version
+        Write-Host Aria2-Version-Website: $website
+
+        # Replace aria2 version in ui_about.py
+        $filePath = "./BBDown_GUI/UI/ui_about.py"
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$aria2c-version\$', "$version"} | Set-Content $filePath
+        (Get-Content $filePath) | Foreach-Object {$_ -replace '\$aria2c-version-url\$', "$website"} | Set-Content $filePath
+        
+        # Download aria2
+        mkdir temp > $null
+        $url = "https://api.github.com/repos/aria2/aria2/releases/latest"
+        $response = Invoke-WebRequest -Uri $url | ConvertFrom-Json
+        $asset = $response.assets | Where-Object { $_.name -like "*win-64bit*" }
+        $browser_download_url = $asset.browser_download_url
+        Write-Host Aria2-Download-Url: $browser_download_url
+        Invoke-WebRequest -Uri $browser_download_url -OutFile temp/aria2-win-64bit.zip
+        Expand-Archive -Path temp/aria2-win-64bit.zip -DestinationPath ./temp
+        mv temp/aria2-*/aria2c.exe BBDown_GUI/aria2c.exe
+        Remove-Item -Recurse -Force ./temp
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install build
+    - name: Build package
+      run: python -m build
+    - name: Publish package
+      run: |
+        pip install --upgrade twine
+        twine upload dist/* -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
