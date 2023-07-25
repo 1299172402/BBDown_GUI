@@ -1,6 +1,16 @@
 # BBDown_GUI
 BBDown的图形化版本
 
+## 屏幕截图
+
+### 简易模式
+
+<img src="https://user-images.githubusercontent.com/29673994/169644975-066c4ac5-7fb1-4361-8c62-bb1e5aba4381.png" height="50%" width="50%" >
+
+### 高级模式
+
+<img src="https://user-images.githubusercontent.com/29673994/200099369-51250aa4-bd7f-4547-864c-f552143adcc1.png">
+
 ## 特性
 
 - [x] 记忆下载参数
@@ -48,39 +58,14 @@ python -m BBDown_GUI
 ![image](https://github.com/1299172402/BBDown_GUI/assets/29673994/45c92ba5-80cc-47db-b5cc-8abe23de2078)
 
 
-
-## 屏幕截图
-
-### 简易模式
-
-<img src="https://user-images.githubusercontent.com/29673994/169644975-066c4ac5-7fb1-4361-8c62-bb1e5aba4381.png" height="50%" width="50%" >
-
-### 高级模式
-
-<img src="https://user-images.githubusercontent.com/29673994/200099369-51250aa4-bd7f-4547-864c-f552143adcc1.png">
-
-
 ## 致谢&License
 
  - https://github.com/nilaoda/BBDown (MIT License)
+
+<!--
 
 ## 相关Repository
 
  - [BBDown_hk](https://github.com/1299172402/BBDown_hk)
 
-## 更新日志
-
-添加以下参数的支持(BBDown v1.5.4)：
-
-| 参数                        | 功能                                                         |
-| --------------------------- | ------------------------------------------------------------ |
-| --force-http                | 下载音视频时强制使用HTTP协议替换HTTPS(默认开启)              |
-| --skip-ai                   | 跳过AI字幕下载                                               |
-| --aria2c-args <aria2c-args> | 调用aria2c的附加参数(默认参数包含"-x16 -s16 -j16 -k 5M") |
-| --host <host>               | 指定BiliPlus host(**解析服务器能够获取你账号的大部分权限!**)     |
-| --ep-host <ep-host>         | 指定BiliPlus EP host                                         |
-| --area <area>               | 指定BiliPlus area 例: hk(使用BiliPlus需要access_token, 不需要cookie) |
-
-<!-- | [未添加]--bandwith-ascending        | 比特率升序(最小体积优先)                                     | -->
-
-
+-->
