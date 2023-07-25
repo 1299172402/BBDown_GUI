@@ -147,7 +147,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: BBDown_GUI_single_file
-        path: dist
+        path: dist/BBDown_GUI.exe
     
 
     - name: Compress the Full
