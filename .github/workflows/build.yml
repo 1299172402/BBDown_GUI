@@ -34,7 +34,12 @@ jobs:
     
     - name: Update BBDown_GUI version
       run: |
-        $version = "$(git describe --tags --always)"
+        $version = ""
+        if (${{ github.event.inputs.doRelease == 'true' }}) {
+          $version = "$(git describe --tags --abbrev=0)"
+        } else {
+          $version = "$(git describe --tags --always)"
+        }
         Write-Host BBDown_GUI-Version: $version
 
         # Replace BBDown_GUI version in ui_about.py
