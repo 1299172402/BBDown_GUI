@@ -8,7 +8,7 @@
 
 先感谢一下这篇入门教程，没有他就没有之后的事了😊
 
-[[ PyQt入门教程 \] Qt Designer工具的使用 - 锅边糊 - 博客园 (cnblogs.com)](https://www.cnblogs.com/linyfeng/p/11223707.html)
+[\[ PyQt入门教程 \] Qt Designer工具的使用 - 锅边糊 - 博客园 (cnblogs.com)](https://www.cnblogs.com/linyfeng/p/11223707.html)
 
 ### 安装pyqt5
 
